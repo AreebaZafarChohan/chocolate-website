@@ -34,7 +34,7 @@ const CategorySection: React.FC = () => {
         );
 
         const addToCart = (product: ProductDetailsType) => {
-          let cart = JSON.parse(localStorage.getItem("cart") || "[]");
+          const cart = JSON.parse(localStorage.getItem("cart") || "[]");
         
           const productIndex = cart.findIndex((item: ProductDetailsType) => item.id === product.id);
         

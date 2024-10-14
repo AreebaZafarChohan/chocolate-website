@@ -8,7 +8,7 @@ const AboutUs = () => {
     const [showStory, setShowStory] = useState(false);
 
     const changeBgHandlerNext = () => {
-      let items = document.querySelectorAll(".about-item");
+      const items = document.querySelectorAll(".about-item");
       document.querySelector(".about-slide")?.appendChild(items[0]);
     };
   
