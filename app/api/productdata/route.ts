@@ -1,5 +1,4 @@
 import { ProductDetailsType } from "@/types/componentTypes";
-import { NextApiRequest, NextApiResponse } from 'next';
 import { NextResponse } from "next/server";
 
 export const products: ProductDetailsType[] = [

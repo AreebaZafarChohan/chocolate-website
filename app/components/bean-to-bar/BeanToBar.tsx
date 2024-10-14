@@ -1,5 +1,3 @@
-import Image from 'next/image';
-
 const BeanToBar = () => {
   return (
     <section className="bg-img mt-6">

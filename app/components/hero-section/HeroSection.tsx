@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '../navbar/Navbar';
 import ImageSlider from '../image-slider/ImageSlider';
 import ScrollingInfinite from '../scrolling-infinite/ScrollingInfinite';
 import ScrollWording from '../scroll-wording/ScrollWording';

@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { UserAccountProps } from "@/types/componentTypes";
-import { FaTrash, FaPlus, FaMinus } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
