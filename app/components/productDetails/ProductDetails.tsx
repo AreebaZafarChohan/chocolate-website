@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation"; 
+import { useParams } from "next/navigation"; 
 import { FaShoppingCart, FaStar } from "react-icons/fa";
 import { getProducts } from "../category-section/CategorySection";
 import { ProductDetailsType } from "@/types/componentTypes";
