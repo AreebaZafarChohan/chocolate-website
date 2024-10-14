@@ -13,7 +13,7 @@ const AboutUs = () => {
     };
   
     const changeBgHandlerPrev = () => {
-      let items = document.querySelectorAll(".about-item");
+      const items = document.querySelectorAll(".about-item");
       document.querySelector(".about-slide")?.prepend(items[items.length - 1]);
     };
   
