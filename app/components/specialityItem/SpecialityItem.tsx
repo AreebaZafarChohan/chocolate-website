@@ -29,7 +29,7 @@ const SpecialityItem: React.FC<SpecialityItemProps> = ({
 
       {/* Buy Now Button */}
       <Link
-      href="/category"
+      href="/products"
         className="mt-4 bg-orange-800 text-white py-2 px-4 rounded hover:bg-orange-900 transition"
       >
         Buy Now

@@ -685,7 +685,10 @@ export const products: ProductDetailsType[] = [
       },
 ];
 
-export function GET() {
-  const data = products;
-  return NextResponse.json(data,{status: 200})
+export async function GET() {
+  try {
+    return NextResponse.json(products, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
+  }
 }
