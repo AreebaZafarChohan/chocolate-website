@@ -5,7 +5,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { ProductDetailsType } from "@/types/componentTypes";
 
 export async function getProducts() {
-  const response = await fetch("/api/data");
+  const response = await fetch("/api/productsData");
   const data = await response.json();
   return data;
 }
