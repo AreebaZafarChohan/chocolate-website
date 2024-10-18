@@ -1,7 +1,7 @@
 import { ProductDetailsType } from "@/types/componentTypes";
 import { NextResponse } from "next/server";
 
-export const products: ProductDetailsType[] = [
+export const data: ProductDetailsType[] = [
 
   // Chocolates
   {
@@ -687,7 +687,7 @@ export const products: ProductDetailsType[] = [
 
 export async function GET() {
   try {
-    return NextResponse.json(products, { status: 200 });
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch products" }, { status: 500 });
   }
