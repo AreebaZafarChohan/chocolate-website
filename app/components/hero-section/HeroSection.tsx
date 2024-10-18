@@ -26,7 +26,7 @@ const HeroSection = () => {
             Perfect for every occasion. Discover our range of chocolate baskets, bouquets,
             and more. Crafted with love for every chocolate lover.
           </p>
-          <button className='text-white bg-orange-700 rounded-lg mt-4 p-3 font-bold hover:bg-orange-900'><Link href="/category">Shop Now</Link></button>
+          <button className='text-white bg-orange-700 rounded-lg mt-4 p-3 font-bold hover:bg-orange-900'><Link href="/products">Shop Now</Link></button>
         </div>
 
         {/* Right Side */}
