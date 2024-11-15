@@ -136,7 +136,7 @@ const CategorySection: React.FC = () => {
             <p className="text-white">
               Price: <span className="text-orange-700">${product.price}</span>
             </p>
-            <div className="flex justify-between flex-row gap-0 lg:flex-row md:flex-col mt-4 md:gap-2">
+            <div className="flex justify-between flex-col sm:flex-row gap-2 lg:gap-0 sm:gap-0 lg:flex-row md:flex-col mt-4 md:gap-2">
               <div className="bg-orange-700 text-white px-3 py-1 rounded flex flex-row gap-1">
                 <FaShoppingCart className="pt-2 text-2xl" />
                 {/* Pass the product to the addToCart function */}

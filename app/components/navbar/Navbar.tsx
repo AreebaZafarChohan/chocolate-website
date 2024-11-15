@@ -40,17 +40,11 @@ const Navbar = () => {
               <span className="icon-tooltip group-hover:opacity-100">Sign up</span>
             </div>
             <div className="relative group">
-              <FaShoppingCart className="text-lg cursor-pointer text-white" />
+              <FaShoppingCart className="text-lg cursor-pointer text-white" 
+              onClick={handleUserAccountClick}/>
               <span className="icon-tooltip group-hover:opacity-100">
-                <a href="/products">Buy now</a>
+                Your Cart
               </span>
-            </div>
-            <div className="relative group">
-              <MdAccountCircle
-                className="text-xl cursor-pointer text-white"
-                onClick={handleUserAccountClick}
-              />
-              <span className="icon-tooltip group-hover:opacity-100">User Account</span>
             </div>
           </div>
 
@@ -90,15 +84,11 @@ const Navbar = () => {
               <span className="icon-tooltip group-hover:opacity-100">Sign up</span>
             </div>
             <div className="relative group">
-              <FaShoppingCart className="text-lg cursor-pointer text-white" />
-              <span className="icon-tooltip group-hover:opacity-100"> <a href="/products">Buy now</a> </span>
-            </div>
-            <div className="relative group">
-              <MdAccountCircle
-                className="text-xl cursor-pointer text-white"
-                onClick={handleUserAccountClick}
-              />
-              <span className="icon-tooltip group-hover:opacity-100">User Account</span>
+              <FaShoppingCart className="text-lg cursor-pointer text-white" 
+              onClick={handleUserAccountClick}/>
+              <span className="icon-tooltip group-hover:opacity-100">
+                Your Cart
+              </span>
             </div>
           </div>
         )}
