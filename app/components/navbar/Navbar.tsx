@@ -1,14 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavbarLi from "../navbar-li/NavbarLi";
 import { GiChocolateBar } from "react-icons/gi";
 import { FaUserAlt, FaUserPlus, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
-import { MdAccountCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
-
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(0); // State for cart count
   const router = useRouter();
 
   const toggleMobileMenu = () => {
@@ -18,6 +17,23 @@ const Navbar = () => {
   const handleUserAccountClick = () => {
     router.push("/user_account");
   };
+
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+      const count = cart.reduce((total: number, item: { quantity: number }) => total + item.quantity, 0);
+      setCartCount(count);
+    };
+
+    // Call the function on mount
+    updateCartCount();
+
+    // Add an event listener for storage to update the count dynamically
+    window.addEventListener("storage", updateCartCount);
+
+    // Cleanup event listener
+    return () => window.removeEventListener("storage", updateCartCount);
+  }, []);
 
   return (
     <header>
@@ -40,11 +56,20 @@ const Navbar = () => {
               <span className="icon-tooltip group-hover:opacity-100">Sign up</span>
             </div>
             <div className="relative group">
-              <FaShoppingCart className="text-lg cursor-pointer text-white" 
-              onClick={handleUserAccountClick}/>
-              <span className="icon-tooltip group-hover:opacity-100">
-                Your Cart
-              </span>
+              <FaShoppingCart
+                className="text-lg cursor-pointer text-white"
+                onClick={handleUserAccountClick}
+              />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+              {cartCount === 0 && (
+                <span className="absolute -top-2 -right-3 bg-gray-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                  0
+                </span>
+              )}
             </div>
           </div>
 
@@ -84,11 +109,20 @@ const Navbar = () => {
               <span className="icon-tooltip group-hover:opacity-100">Sign up</span>
             </div>
             <div className="relative group">
-              <FaShoppingCart className="text-lg cursor-pointer text-white" 
-              onClick={handleUserAccountClick}/>
-              <span className="icon-tooltip group-hover:opacity-100">
-                Your Cart
-              </span>
+              <FaShoppingCart
+                className="text-lg cursor-pointer text-white"
+                onClick={handleUserAccountClick}
+              />
+              {cartCount > 0 && (
+                <span className="absolute -top-3 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-4 w-3 flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+              {cartCount === 0 && (
+                <span className="absolute -top-3 -right-3 bg-gray-500 text-white text-xs font-bold rounded-full h-4 w-3 flex items-center justify-center">
+                  0
+                </span>
+              )}
             </div>
           </div>
         )}
