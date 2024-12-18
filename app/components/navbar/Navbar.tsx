@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import NavbarLi from "../navbar-li/NavbarLi";
 import { GiChocolateBar } from "react-icons/gi";
 import { FaUserAlt, FaUserPlus, FaShoppingCart, FaBars, FaTimes } from "react-icons/fa";
