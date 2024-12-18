@@ -7,7 +7,6 @@ import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0); // State for cart count
   const router = useRouter();
 
   const toggleMobileMenu = () => {
@@ -17,23 +16,6 @@ const Navbar = () => {
   const handleUserAccountClick = () => {
     router.push("/user_account");
   };
-
-  useEffect(() => {
-    const updateCartCount = () => {
-      const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-      const count = cart.reduce((total: number, item: { quantity: number }) => total + item.quantity, 0);
-      setCartCount(count);
-    };
-
-    // Call the function on mount
-    updateCartCount();
-
-    // Add an event listener for storage to update the count dynamically
-    window.addEventListener("storage", updateCartCount);
-
-    // Cleanup event listener
-    return () => window.removeEventListener("storage", updateCartCount);
-  }, []);
 
   return (
     <header>
