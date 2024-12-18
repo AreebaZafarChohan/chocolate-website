@@ -60,16 +60,6 @@ const Navbar = () => {
                 className="text-lg cursor-pointer text-white"
                 onClick={handleUserAccountClick}
               />
-              {cartCount > 0 && (
-                <span className="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                  {cartCount}
-                </span>
-              )}
-              {cartCount === 0 && (
-                <span className="absolute -top-2 -right-3 bg-gray-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                  0
-                </span>
-              )}
             </div>
           </div>
 
