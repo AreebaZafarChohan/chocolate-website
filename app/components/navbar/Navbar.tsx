@@ -42,6 +42,7 @@ const Navbar = () => {
                 className="text-lg cursor-pointer text-white"
                 onClick={handleUserAccountClick}
               />
+              <span className="icon-tooltip group-hover:opacity-100">Cart</span>
             </div>
           </div>
 
@@ -85,6 +86,7 @@ const Navbar = () => {
                 className="text-lg cursor-pointer text-white"
                 onClick={handleUserAccountClick}
               />
+              <span className="icon-tooltip group-hover:opacity-100">Cart</span>
             </div>
           </div>
         )}
