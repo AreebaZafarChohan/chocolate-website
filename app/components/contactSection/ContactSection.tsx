@@ -16,6 +16,8 @@ const ContactSection: React.FC = () => {
     message: "",
   });
 
+  const [showPopup, setShowPopup] = useState(false); // Popup visibility state
+
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -70,16 +72,23 @@ const ContactSection: React.FC = () => {
       return; // Stop submission if validation fails
     }
 
-    // Secure handling of form data here, e.g., sending to an API
+    // Handle secure form submission
     console.log(formData);
 
-    // Reset the form after successful submission
+    // Show the popup
+    setShowPopup(true);
+
+    // Reset the form
     setFormData({
       name: "",
       email: "",
       subject: "",
       message: "",
     });
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
   };
 
   return (
@@ -145,6 +154,24 @@ const ContactSection: React.FC = () => {
           Send Message
         </button>
       </form>
+
+      {/* Popup */}
+      {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg text-center">
+            <h3 className="text-lg font-bold text-orange-950">Thank You!</h3>
+            <p className="mt-2 text-sm text-gray-700">
+              Your message has been received. We will get back to you shortly.
+            </p>
+            <button
+              onClick={closePopup}
+              className="mt-4 bg-orange-950 text-white px-4 py-2 rounded-md hover:bg-orange-700"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
