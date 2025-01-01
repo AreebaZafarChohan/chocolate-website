@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation"; 
 import { FaShoppingCart, FaStar } from "react-icons/fa";
-import { getProducts } from "../category-section/CategorySection";
 import { ProductDetailsType } from "@/types/componentTypes";
+import { client } from "@/sanity/lib/client";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 const ProductDetails = () => {
   const params = useParams();
@@ -16,17 +18,29 @@ const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
 
+  console.log("id", id);
+  console.log("product", productId);
+  
   useEffect(() => {
-    const fetchProductDetails = async () => {
-      const productsData = await getProducts(); 
-      const productDetails = productsData.find(
-        (item: ProductDetailsType) => item.id === productId
-      );
-      setDetails(productDetails);
-    };
+      const fetchProductDetails = async () => {
+        try {
+          const product = await client.fetch(
+            `*[_type == "products"]{id,name,image,"category":category->category,price,description, images[].asset->url}`
+          );
+          const productDetail = product.find(
+                   (product: ProductDetailsType) =>
+                     product.id === productId
+                 );
+          setDetails(productDetail);
 
-    fetchProductDetails();
-  }, [productId]);
+          console.log("product details", details);
+        } catch (error) {
+          console.error("Error fetching product details:", error);
+        }
+      };
+  
+      fetchProductDetails();
+    }, [productId]);
 
   useEffect(() => {
     const allHoverImages = document.querySelectorAll<HTMLImageElement>(
@@ -95,13 +109,7 @@ const ProductDetails = () => {
     <div className="container w-full p-4 lg:mx-20 md:mx-20 bg-transparent rounded-xl shadow-md flex flex-col lg:flex-row justify-center items-center gap-10 mt-10 mb-20 ">
       <div className="product-left  lg:w-[50%] my-8">
         <div className="img-container">
-          <img
-            src={details.image}
-            alt={details.name}
-            height={400}
-            width={400}
-            className="w-full h-80 object-cover"
-          />
+        <Image src={urlFor(details.image).url()} alt={details.name} width={200} height={400} className="w-full h-80 object-cover"/>
         </div>
 
         <div className="hover-container">
