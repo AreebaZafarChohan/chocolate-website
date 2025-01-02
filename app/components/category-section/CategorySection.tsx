@@ -130,15 +130,15 @@ const CategorySection: React.FC = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredProducts.map((product) => (
           <div key={product.id} className="c-div border p-4 rounded shadow-lg">
-             <Image src={urlFor(product.image).url()} alt={product.name} width={200} height={400}  className="w-full h-32 object-cover mb-2 rounded"/>
+             <Image src={urlFor(product.image).url()} alt={product.name} width={200} height={400}  className="w-full h-44 object-cover mb-2 rounded"/>
 
             <h2 className="font-semibold text-lg">{product.name}</h2>
             <p className="text-white">
               Price: <span className="text-orange-700">${product.price}</span>
             </p>
-            <div className="flex justify-between flex-col sm:flex-row gap-2 lg:gap-0 sm:gap-0 lg:flex-row md:flex-col mt-4 md:gap-2">
-              <div className="bg-orange-700 text-white px-3 py-1 rounded flex flex-row gap-1">
-                <FaShoppingCart className="pt-2 text-2xl" />
+            <div className="flex justify-between flex-col sm:flex-row gap-2 lg:gap-0 sm:gap-0 lg:flex-row md:flex-col mt-4 md:gap-2 card-btns">
+              <div className="bg-orange-700 text-white px-3 py-1 rounded flex flex-row gap-1 add-to-cart">
+                <FaShoppingCart className="pt-2 text-2xl cart-icon" />
                 <button onClick={() => addToCart(product)}>Add to Cart</button>
               </div>
               <Link

@@ -34,7 +34,7 @@ export interface ProductProps {
     price: number;
     category: string;
     image: string;
-    imagesList?: string[] | undefined;
+    images?: string[] | undefined;
     description?: string;
   }
 
@@ -44,7 +44,7 @@ export interface ProductProps {
     price: number;
     category: string;
     image: string;
-    imagesList?: string[] | undefined;
+    images?: string[] | undefined;
     description?: string;
     quantity: number
   }

@@ -17,23 +17,23 @@ const ProductDetails = () => {
   const [details, setDetails] = useState<ProductDetailsType | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [showPopup, setShowPopup] = useState(false);
+  const [hoveredImage, setHoveredImage] = useState<string | null>(null);
 
-  console.log("id", id);
-  console.log("product", productId);
-  
   useEffect(() => {
       const fetchProductDetails = async () => {
         try {
           const product = await client.fetch(
-            `*[_type == "products"]{id,name,image,"category":category->category,price,description, images[].asset->url}`
+            `*[_type == "products"]{id,name,image,"category":category->category,price,description, images[]{asset->{url}}
+            }`
           );
+
           const productDetail = product.find(
                    (product: ProductDetailsType) =>
-                     product.id === productId
+                    String(product.id) === String(productId)
                  );
+
           setDetails(productDetail);
 
-          console.log("product details", details);
         } catch (error) {
           console.error("Error fetching product details:", error);
         }
@@ -42,33 +42,16 @@ const ProductDetails = () => {
       fetchProductDetails();
     }, [productId]);
 
-  useEffect(() => {
-    const allHoverImages = document.querySelectorAll<HTMLImageElement>(
-      ".hover-container div img"
-    );
-    const imgContainer =
-      document.querySelector<HTMLImageElement>(".img-container img");
-
-    if (allHoverImages.length > 0 && imgContainer) {
-      allHoverImages[0].parentElement?.classList.add("active");
-
-      const resetActiveImg = () => {
-        allHoverImages.forEach((img) => {
-          img.parentElement?.classList.remove("active");
-        });
-      };
-
-      allHoverImages.forEach((img) => {
-        img.addEventListener("mouseover", () => {
-          if (imgContainer && img.src) {
-            imgContainer.src = img.src;
-          }
-          resetActiveImg();
-          img.parentElement?.classList.add("active");
-        });
-      });
-    }
-  }, [details]);
+    useEffect(() => {
+      if (details?.image) {
+        setHoveredImage(urlFor(details.image).url()); 
+      }
+    }, [details]);
+  
+    const handleHoverImage = (imageUrl: string) => {
+      setHoveredImage(imageUrl); 
+    };
+  
 
   const increaseQuantity = () => {
     setQuantity((prev) => prev + 1);
@@ -108,20 +91,33 @@ const ProductDetails = () => {
   return (
     <div className="container w-full p-4 lg:mx-20 md:mx-20 bg-transparent rounded-xl shadow-md flex flex-col lg:flex-row justify-center items-center gap-10 mt-10 mb-20 ">
       <div className="product-left  lg:w-[50%] my-8">
-        <div className="img-container">
-        <Image src={urlFor(details.image).url()} alt={details.name} width={200} height={400} className="w-full h-80 object-cover"/>
+      <div className="img-container border-2 p-4 rounded border-[rgb(255,145,163)]">
+          {hoveredImage && (
+            <Image
+              src={hoveredImage}
+              alt={details.name}
+              width={200}
+              height={400}
+              className="w-full h-80 object-contain"
+            />
+          )}
         </div>
 
+        {/* Thumbnail Images */}
         <div className="hover-container">
-          {details.imagesList && details.imagesList.length > 0 ? (
-            details.imagesList.map((image, index) => (
-              <div key={index}>
-                <img
-                  src={image}
-                  alt="product img"
+          {details.images && details.images.length > 0 ? (
+            details.images.map((image, index) => (
+              <div
+                key={index}
+                onMouseOver={() => handleHoverImage(urlFor(image).url())}
+                className="cursor-pointer border rounded-md p-1 hover:border-orange-700"
+              >
+                <Image
+                  src={urlFor(image).url()}
+                  alt={`Product Image ${index + 1}`}
                   height={100}
                   width={100}
-                  className="image h-28 w-40"
+                  className="image h-28 w-40 object-cover"
                 />
               </div>
             ))
